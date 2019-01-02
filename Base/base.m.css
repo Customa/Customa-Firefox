@@ -15,6 +15,8 @@
 		--background: #161621;
 		--foreground: #212126;
 
+		background-color: var(--background) !important;
+		
 		/* popup menus */
 		--arrowpanel-dimmed: var(--foreground) !important;
 		--panel-separator-color: var(--background) !important;
@@ -24,25 +26,82 @@
 
 		/* generic colors */
 		--toolbar-bgcolor: var(--foreground) !important;
+		--toolbarbutton-hover-background: var(--foreground) !important;
 		--chrome-background-color: var(--background) !important;
 		--chrome-secondary-background-color: var(--foreground) !important;
 		--lwt-toolbarbutton-hover-background: var(--background) !important;
 		--lwt-toolbar-field-background-color: var(--background) !important;
 		--lwt-toolbar-field-border-color: var(--background) !important;
-		--lwt-accent-color-inactive: var(--background) !important;
-		--lwt-accent-color: var(--background) !important;
 		--lwt-background-tab-separator-color: transparent !important;
 	}
 
 /* fix hover */
 	.urlbar-icon:not([disabled]):hover, .urlbar-icon-wrapper:not([disabled]):hover {
-		background-color: var(--foreground) !important;;
+		background-color: var(--foreground) !important;
+	}
+
+/* tabs */
+	#nav-bar {
+		box-shadow: none !important;
+	}
+
+	.tabbrowser-tab::before, .tabbrowser-tab::after {
+		content: none !important;
+	}
+
+	.close-icon {
+		display: none;
+	}
+
+	.close-icon:hover {
+	  fill-opacity: 0 !important;
+	}
+
+	#tabbrowser-tabs > .tabbrowser-tab > .tab-stack {
+		opacity: 0.5 !important;
+		transition: opacity 0.2s !important;
+	}
+		
+	#tabbrowser-tabs > .tabbrowser-tab .tab-background {
+		background-color: transparent !important;
+		background-image: none !important;
+	}
+
+	#tabbrowser-tabs > .tabbrowser-tab:hover > .tab-stack, #tabbrowser-tabs > .tabbrowser-tab[selected="true"] > .tab-stack {
+		opacity: 1 !important;
+	}
+
+	#tabbrowser-tabs > .tabbrowser-tab:first-child > .tab-stack::before {
+		content: none !important;
+	}
+		
+	#tabbrowser-tabs > .tabbrowser-tab > .tab-stack::before {
+		content: "";
+		width: 0.5em;
+		height: 0;
+		background: transparent;
+		display: block;
+		position: absolute;
+		top: 50%;
+		left: 0;
+		border-radius: 0.5em;
+		transition: height 0.2s, top 0.2s, background 0.2s !important;
+	}
+		
+	#tabbrowser-tabs > .tabbrowser-tab[selected="true"] > .tab-stack::before {
+		height: 60%;
+		background: var(--accent);
+		top: 20%;
+	}
+
+/* round */
+	toolbar .toolbarbutton-1 > .toolbarbutton-icon, toolbar .toolbarbutton-1 > .toolbarbutton-text, toolbar .toolbarbutton-1 > .toolbarbutton-badge-stack {
+		border-radius: 50% !important;
 	}
 
 /* active tabs top line color */
-	.tab-line[selected=true] {
-		background-color: var(--accent) !important;
-		height: 2px !important;
+	.tab-line {
+		display: none;
 	}
 
 /* disable browser border */
@@ -50,21 +109,7 @@
 		content: none !important;
 	}
 
-/* disable tab borders */
-	.tabbrowser-tab::after {
-		content: none;
-	}
-
-/* tab hover */
-	#tabbrowser-tabs > .tabbrowser-tab:hover .tab-background:not([selected="true"]) {
-		background-color: var(--foreground) !important;
-	}
-
 /* apply accent */
-	#tabbrowser-tabs tab:hover .tab-line:not([selected="true"]):not([multiselected]) {
-		background-color: rgba(var(--color), 0.9) !important;
-	}
-
 	#appMenu-tp-toggle[enabled="true"] {
 		background-color: var(--accent) !important;
 		border-color: var(--accent) !important;
@@ -72,19 +117,6 @@
 
 	#downloads-button[attention="success"] > #downloads-indicator-anchor > #downloads-indicator-icon, #downloads-button[attention="success"] > #downloads-indicator-anchor > #downloads-indicator-progress-outer {
 		fill: var(--accent) !important;
-	}
-
-/* tab opacity */
-	#tabbrowser-tabs tab {
-		opacity: 0.5 !important;
-		transition: opacity 0.1s,
-					background-color 0.1s,
-					min-width 100ms ease-out,
-					max-width 100ms ease-out !important;
-	}
-
-	#tabbrowser-tabs tab:hover, #tabbrowser-tabs tab[selected="true"] {
-		opacity: 1 !important;
 	}
 
 /* userchrome.js */
