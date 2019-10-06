@@ -1,0 +1,9 @@
+:root {
+	/* auto, thin, or none */
+	--scrollbar-thickness: auto;
+}
+
+:root {
+	scrollbar-color: var(--foreground) var(--background) !important;
+	scrollbar-width: var(--scrollbar-thickness);
+}

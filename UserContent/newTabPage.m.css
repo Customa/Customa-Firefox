@@ -1,6 +1,6 @@
 @-moz-document url-prefix("about:newtab") {
 	body {
-		background-color: var(--foreground) !important;
+		background-color: var(--foreground-color) !important;
 	}
 
 	#root > * {
