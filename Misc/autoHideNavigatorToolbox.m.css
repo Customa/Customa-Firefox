@@ -1,27 +1,26 @@
-/* variables */
-	:root {
-		--actuation-distance: 10px;
-	}
+:root {
+	--actuation-distance: 10px;
+}
 
 /* hide navigator-toolbox*/
-	#navigator-toolbox {
-		height: var(--actuation-distance);
-		opacity: 0;
-		margin-bottom: calc(-1 * var(--actuation-distance));
-		overflow: hidden;
-		transition-timing-function: ease;
-		transition-property: height opacity;
-		transition-delay: 20ms;
-		transition-duration: 125ms;
-	}
+#navigator-toolbox {
+	height: var(--actuation-distance);
+	opacity: 0;
+	margin-bottom: calc(-1 * var(--actuation-distance));
+	overflow: hidden;
+	transition-timing-function: ease;
+	transition-property: height opacity;
+	transition-delay: 20ms;
+	transition-duration: 125ms;
+}
 
 /* show navigator-toolbox on hover */
-	#navigator-toolbox:hover {
-		height: initial;
-		margin-bottom:initial;
-		opacity: initial;
-		transition-timing-function: ease;
-		transition-property: height opacity;
-		transition-delay: 20ms;
-		transition-duration: 125ms;
-	}
+#navigator-toolbox:hover {
+	height: initial;
+	margin-bottom:initial;
+	opacity: initial;
+	transition-timing-function: ease;
+	transition-property: height opacity;
+	transition-delay: 20ms;
+	transition-duration: 125ms;
+}

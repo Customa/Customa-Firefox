@@ -1,125 +1,73 @@
-/* remove fullscreen video warning */
-	@-moz-document url(chrome://browser/content/browser.xul) {
-		#fullscreen-warning {
-		  display: none !important;
-		}
-	}
+:root {
+	--text-color: #dddddd;
+	--background-color: #161616;
+	--foreground-color: #212121;
+}
 
-/* namespaces/imports */
-	@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+/* override xul colors */
+:root {
+	--lwt-text-color: var(--text-color) !important;
+	--arrowpanel-color: var(--text-color) !important;
 
-/* variables */
-	:root {
-		--color: 250, 0, 70;
-		--accent: rgb(var(--color));
-		--background: #161621;
-		--foreground: #212126;
+	--lwt-accent-color: var(--background-color) !important;
+	--toolbar-bgcolor: var(--background-color) !important;
+	
+	--lwt-toolbar-field-color: var(--text-color) !important;
+	--lwt-toolbar-field-background-color: var(--background-color) !important;
+	--lwt-toolbar-field-border-color: var(--background-color) !important;
+	
+	--lwt-toolbarbutton-icon-fill: var(--text-color) !important;
+	--lwt-toolbarbutton-hover-background: transparent !important;
+	--lwt-toolbarbutton-active-background: transparent !important;
+	
+	--arrowpanel-background: var(--background-color) !important;
+	--arrowpanel-border-color: var(--background-color) !important;
+}
 
-		background-color: var(--background) !important;
-		
-		/* popup menus */
-		--arrowpanel-dimmed: var(--foreground) !important;
-		--panel-separator-color: var(--background) !important;
-		--arrowpanel-background: var(--background) !important;
-		--backbutton-background: #f00 !important;
-		--toolbar-field-focus-border-color: var(--accent) !important;
+/* hide urlbar shadow */
+#urlbar { box-shadow: none !important; }
 
-		/* generic colors */
-		--toolbar-bgcolor: var(--foreground) !important;
-		--toolbarbutton-hover-background: var(--foreground) !important;
-		--chrome-background-color: var(--background) !important;
-		--chrome-secondary-background-color: var(--foreground) !important;
-		--lwt-toolbarbutton-hover-background: var(--background) !important;
-		--lwt-toolbar-field-background-color: var(--background) !important;
-		--lwt-toolbar-field-border-color: var(--background) !important;
-		--lwt-background-tab-separator-color: transparent !important;
-	}
+/* tab hover effect */
+tab, toolbarbutton {
+	filter: grayscale(50%);
+	opacity: 0.5;
+	transition: opacity 0.2s, filter 0.2s !important;
+}
 
-/* fix hover */
-	.urlbar-icon:not([disabled]):hover, .urlbar-icon-wrapper:not([disabled]):hover {
-		background-color: var(--foreground) !important;
-	}
+tab:hover, tab[selected="true"],
+toolbarbutton:hover,
+toolbarbutton[open="true"] {
+	filter: grayscale(0);
+	opacity: 1;
+}
 
-/* tabs */
-	#nav-bar {
-		box-shadow: none !important;
-	}
+/* only show close button on active tab */
+tab .tab-close-button { display: none !important; }
+tab[selected="true"] .tab-close-button { display: block !important; }
+tab[pinned="true"] .tab-close-button { display: none !important; }
 
-	.tabbrowser-tab::before, .tabbrowser-tab::after {
-		content: none !important;
-	}
+/* tab background color fix */
+.tab-background { background: transparent !important; }
 
-	.close-icon {
-		display: none;
-	}
+/* hide tab highlight line */
+.tab-line { display: none; }
+/* hide tab dividers */
+.tabbrowser-tab::after, .tabbrowser-tab::before { content: none !important; }
+/* hide other tab line */
+.tab-background { border: none !important; }
+#nav-bar { box-shadow: none !important; }
+/* hide tab attention */
+.tab-content { background-image: none !important; }
 
-	.close-icon:hover {
-	  fill-opacity: 0 !important;
-	}
+/* hide folder icon */
+toolbarbutton[container="true"] .toolbarbutton-icon { display: none; }
+/* smol folder text */
+toolbarbutton[container="true"] { font-size: 11px; }
+/* fix bookmark padding */
+#PersonalToolbar toolbarbutton {
+	margin: 0 !important;
+	padding: 1px 2px !important;
+}
 
-	#tabbrowser-tabs > .tabbrowser-tab > .tab-stack {
-		opacity: 0.5 !important;
-		transition: opacity 0.2s !important;
-	}
-		
-	#tabbrowser-tabs > .tabbrowser-tab .tab-background {
-		background-color: transparent !important;
-		background-image: none !important;
-	}
-
-	#tabbrowser-tabs > .tabbrowser-tab:hover > .tab-stack, #tabbrowser-tabs > .tabbrowser-tab[selected="true"] > .tab-stack {
-		opacity: 1 !important;
-	}
-
-	#tabbrowser-tabs > .tabbrowser-tab:first-child > .tab-stack::before {
-		content: none !important;
-	}
-		
-	#tabbrowser-tabs > .tabbrowser-tab > .tab-stack::before {
-		content: "";
-		width: 0.5em;
-		height: 0;
-		background: transparent;
-		display: block;
-		position: absolute;
-		top: 50%;
-		left: 0;
-		border-radius: 0.5em;
-		transition: height 0.2s, top 0.2s, background 0.2s !important;
-	}
-		
-	#tabbrowser-tabs > .tabbrowser-tab[selected="true"] > .tab-stack::before {
-		height: 60%;
-		background: var(--accent);
-		top: 20%;
-	}
-
-/* round */
-	toolbar .toolbarbutton-1 > .toolbarbutton-icon, toolbar .toolbarbutton-1 > .toolbarbutton-text, toolbar .toolbarbutton-1 > .toolbarbutton-badge-stack {
-		border-radius: 50% !important;
-	}
-
-/* active tabs top line color */
-	.tab-line {
-		display: none;
-	}
-
-/* disable browser border */
-	#navigator-toolbox::after {
-		content: none !important;
-	}
-
-/* apply accent */
-	#appMenu-tp-toggle[enabled="true"] {
-		background-color: var(--accent) !important;
-		border-color: var(--accent) !important;
-	}
-
-	#downloads-button[attention="success"] > #downloads-indicator-anchor > #downloads-indicator-icon, #downloads-button[attention="success"] > #downloads-indicator-anchor > #downloads-indicator-progress-outer {
-		fill: var(--accent) !important;
-	}
-
-/* userchrome.js */
-	#PanelUI-menu-button {
-		-moz-binding: url(data:text/xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIj8+DQo8IS0tIENvcHlyaWdodCAoYykgMjAxNyBIYWdnYWkgTnVjaGkNCkF2YWlsYWJsZSBmb3IgdXNlIHVuZGVyIHRoZSBNSVQgTGljZW5zZToNCmh0dHBzOi8vb3BlbnNvdXJjZS5vcmcvbGljZW5zZXMvTUlUDQogLS0+DQoNCjwhLS0gUnVuIHVzZXJDaHJvbWUuanMvdXNlckNocm9tZS54dWwgYW5kIC51Yy5qcy8udWMueHVsLy5jc3MgZmlsZXMgIC0tPg0KPGJpbmRpbmdzIHhtbG5zPSJodHRwOi8vd3d3Lm1vemlsbGEub3JnL3hibCI+DQogICAgPGJpbmRpbmcgaWQ9ImpzIiBleHRlbmRzPSJjaHJvbWU6Ly9nbG9iYWwvY29udGVudC9iaW5kaW5ncy90b29sYmFyYnV0dG9uLnhtbCNtZW51Ij4NCiAgICAgICAgPGltcGxlbWVudGF0aW9uPg0KICAgICAgICAgICAgPGNvbnN0cnVjdG9yPjwhW0NEQVRBWw0KICAgICAgICAgICAgICAgIGlmKHdpbmRvdy51c2VyQ2hyb21lSnNNb2QpIHJldHVybjsNCiAgICAgICAgICAgICAgICB3aW5kb3cudXNlckNocm9tZUpzTW9kID0gdHJ1ZTsNCiAgICAgICAgICAgICAgICANCiAgICAgICAgICAgICAgICB2YXIgY2hyb21lRmlsZXMgPSBGaWxlVXRpbHMuZ2V0RGlyKCJVQ2hybSIsIFtdKS5kaXJlY3RvcnlFbnRyaWVzOw0KICAgICAgICAgICAgICAgIHZhciB4dWxGaWxlcyA9IFtdOw0KICAgICAgICAgICAgICAgIHZhciBzc3MgPSBDY1snQG1vemlsbGEub3JnL2NvbnRlbnQvc3R5bGUtc2hlZXQtc2VydmljZTsxJ10uZ2V0U2VydmljZShDaS5uc0lTdHlsZVNoZWV0U2VydmljZSk7DQogICAgICAgICAgICAgICAgDQogICAgICAgICAgICAgICAgd2hpbGUoY2hyb21lRmlsZXMuaGFzTW9yZUVsZW1lbnRzKCkpIHsNCiAgICAgICAgICAgICAgICAgICAgdmFyIGZpbGUgPSBjaHJvbWVGaWxlcy5nZXROZXh0KCkuUXVlcnlJbnRlcmZhY2UoQ2kubnNJRmlsZSk7DQogICAgICAgICAgICAgICAgICAgIHZhciBmaWxlVVJJID0gU2VydmljZXMuaW8ubmV3RmlsZVVSSShmaWxlKTsNCiAgICAgICAgICAgICAgICAgICAgDQogICAgICAgICAgICAgICAgICAgIGlmKGZpbGUuaXNGaWxlKCkpIHsNCiAgICAgICAgICAgICAgICAgICAgICAgIGlmKC8oXnVzZXJDaHJvbWV8XC51YylcLmpzJC9pLnRlc3QoZmlsZS5sZWFmTmFtZSkpIHsNCiAgICAgICAgICAgICAgICAgICAgICAgICAgICBTZXJ2aWNlcy5zY3JpcHRsb2FkZXIubG9hZFN1YlNjcmlwdFdpdGhPcHRpb25zKGZpbGVVUkkuc3BlYywge3RhcmdldDogd2luZG93LCBpZ25vcmVDYWNoZTogdHJ1ZX0pOw0KICAgICAgICAgICAgICAgICAgICAgICAgfQ0KICAgICAgICAgICAgICAgICAgICAgICAgZWxzZSBpZigvKF51c2VyQ2hyb21lfFwudWMpXC54dWwkL2kudGVzdChmaWxlLmxlYWZOYW1lKSkgew0KICAgICAgICAgICAgICAgICAgICAgICAgICAgIHh1bEZpbGVzLnB1c2goZmlsZVVSSS5zcGVjKTsNCiAgICAgICAgICAgICAgICAgICAgICAgIH0NCiAgICAgICAgICAgICAgICAgICAgICAgIGVsc2UgaWYoL1wuYXNcLmNzcyQvaS50ZXN0KGZpbGUubGVhZk5hbWUpKSB7DQogICAgICAgICAgICAgICAgICAgICAgICAgICAgaWYoIXNzcy5zaGVldFJlZ2lzdGVyZWQoZmlsZVVSSSwgc3NzLkFHRU5UX1NIRUVUKSkNCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgc3NzLmxvYWRBbmRSZWdpc3RlclNoZWV0KGZpbGVVUkksIHNzcy5BR0VOVF9TSEVFVCk7DQogICAgICAgICAgICAgICAgICAgICAgICB9DQogICAgICAgICAgICAgICAgICAgICAgICBlbHNlIGlmKC9eKD8hKHVzZXJDaHJvbWV8dXNlckNvbnRlbnQpXC5jc3MkKS4rXC5jc3MkL2kudGVzdChmaWxlLmxlYWZOYW1lKSkgew0KICAgICAgICAgICAgICAgICAgICAgICAgICAgIGlmKCFzc3Muc2hlZXRSZWdpc3RlcmVkKGZpbGVVUkksIHNzcy5VU0VSX1NIRUVUKSkNCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgc3NzLmxvYWRBbmRSZWdpc3RlclNoZWV0KGZpbGVVUkksIHNzcy5VU0VSX1NIRUVUKTsNCiAgICAgICAgICAgICAgICAgICAgICAgIH0NCiAgICAgICAgICAgICAgICAgICAgfQ0KICAgICAgICAgICAgICAgIH0NCiAgICAgICAgICAgICAgICANCiAgICAgICAgICAgICAgICBzZXRUaW1lb3V0KGZ1bmN0aW9uIGxvYWRYVUwoKSB7DQogICAgICAgICAgICAgICAgICAgIGlmKHh1bEZpbGVzLmxlbmd0aCA+IDApIHsNCiAgICAgICAgICAgICAgICAgICAgICAgIGRvY3VtZW50LmxvYWRPdmVybGF5KHh1bEZpbGVzLnNoaWZ0KCksIG51bGwpOw0KICAgICAgICAgICAgICAgICAgICAgICAgc2V0VGltZW91dChsb2FkWFVMLCA1KTsNCiAgICAgICAgICAgICAgICAgICAgfQ0KICAgICAgICAgICAgICAgIH0sIDApOw0KICAgICAgICAgICAgXV0+PC9jb25zdHJ1Y3Rvcj4NCiAgICAgICAgPC9pbXBsZW1lbnRhdGlvbj4NCiAgICA8L2JpbmRpbmc+DQo8L2JpbmRpbmdzPg==);
-	}
+/* hide useless divider */
+#navigator-toolbox { border-bottom: none !important; }

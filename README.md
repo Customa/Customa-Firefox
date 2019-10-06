@@ -1,4 +1,8 @@
-# Customa for Firefox
-Customa 
+# Customa
+Customa userChrome theme for Firefox.
 
-View more information on the [wiki](https://github.com/Customa/Customa-Firefox/wiki).
+Based off of the default Firefox dark theme, so make sure to have that applied
+first. Get started with the
+[usage](https://github.com/Customa/Customa-Firefox/wiki/Usage) page on the
+wiki. Any other documentation is also available on the
+[wiki](https://github.com/Customa/Customa-Firefox/wiki).
