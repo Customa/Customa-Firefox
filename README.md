@@ -1,4 +1,5 @@
-# Customa
+![Customa Logo](https://customa.gitlab.io/Customa-Misc/Logo/ProjectsLogos/Inline/PNG/Customa-Firefox.png)
+
 Customa userChrome theme for Firefox.
 
 Based off of the default Firefox dark theme, so make sure to have that applied
